@@ -19,7 +19,8 @@
     "hubot-scripts": "^2.16.2",
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^3.3.0",
-    "hubot-auto-deploy": "0.1.9"
+    "hubot-auto-deploy": "0.1.9",
+    "hubot-asana":""
   },
   "engines": {
     "node": "0.10.x"
