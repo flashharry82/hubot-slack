@@ -6,6 +6,8 @@ module.exports = (robot) ->
 
     query = querystring.parse(url.parse(req.url).query)
 
+    console.log query
+
     user = {}
     user.room = query.room if query.room
 #    user.type = query.type if query.type
