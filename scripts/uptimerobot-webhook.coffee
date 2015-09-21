@@ -4,9 +4,7 @@ querystring = require('querystring')
 module.exports = (robot) ->
   robot.router.post "/uptimerobot/:room", (req, res) ->
 
-    console.log req.url
     query = querystring.parse(url.parse(req.url).query)
-
 
     user = {}
     user.room = query.room if query.room
@@ -23,9 +21,8 @@ module.exports = (robot) ->
         when '9' then 'down'
 
     try
-      robot.send user, "Monitor test"
+      robot.send user, "Monitor is #{query.status} #{query.monitorFriendlyName} (#{query.monitorURL})"
     catch error
-      robot.logger.error "uptimerobot error: #{error}."
       console.log "uptimerobot error: #{error}."
 
     res.end "OK"
