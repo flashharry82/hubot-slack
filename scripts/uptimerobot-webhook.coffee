@@ -2,7 +2,7 @@ url = require('url')
 querystring = require('querystring')
 
 module.exports = (robot) ->
-  robot.router.post "/uptimerobot/:room", (req, res) ->
+  robot.router.post "/uptimerobot", (req, res) ->
 
     query = querystring.parse(url.parse(req.url).query)
 
