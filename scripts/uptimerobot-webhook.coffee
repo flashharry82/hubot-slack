@@ -6,16 +6,15 @@ module.exports = (robot) ->
 
     query = querystring.parse(url.parse(req.url).query)
 
-    console.log query
-
     user = {}
-    user.room = query.room if query.room
+#    user.room = query.room if query.room
 #    user.type = query.type if query.type
 
 #    {room} = req.params;
-#    {monitorID, monitorURL, monitorFriendlyName, alertType, alertDetails, monitorAlertContacts} = url.parse(req.url, true).query
+    {room, monitorID, monitorURL, monitorFriendlyName, alertType, alertDetails, monitorAlertContacts} = url.parse(req.url, true).query
+    user.room = room
 
-    status = switch query.alertType
+    status = switch alertType
         when '0' then 'paused'
         when '1' then 'not checked yet'
         when '2' then 'up'
@@ -23,7 +22,7 @@ module.exports = (robot) ->
         when '9' then 'down'
 
     try
-      robot.send user, "Monitor is #{status} #{query.monitorFriendlyName} (#{query.monitorURL})"
+      robot.send user, "Monitor is #{status} #{monitorFriendlyName} (#{monitorURL})"
     catch error
       console.log "uptimerobot error: #{error}."
 
