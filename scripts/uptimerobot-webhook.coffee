@@ -12,7 +12,7 @@ module.exports = (robot) ->
         when '9' then 'down'
 
     try
-      robot.send user, "Monitor is #{status} #{data.monitorFriendlyName} (#{data.monitorURL})"
+      robot.send user, "#{data.monitorFriendlyName} is #{test.status} (#{data.monitorURL})"
     catch error
       robot.send "uptimerobot error: #{error}."
 
