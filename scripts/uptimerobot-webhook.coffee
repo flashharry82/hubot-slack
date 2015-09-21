@@ -1,7 +1,15 @@
-module.exports = (robot) ->
-  robot.router.post "/uptimerobot", (req, res) ->
+url = require('url')
+querystring = require('querystring')
 
-    data = req.body
+module.exports = (robot) ->
+  robot.router.get "/uptimerobot", (req, res) ->
+
+    # FOR QUERYSTRING
+    data = querystring.parse(url.parse(req.url).query)
+
+    # FOR JSON
+    #data = req.body
+
     user = {room: data.room}
 
     status = switch data.alertType
