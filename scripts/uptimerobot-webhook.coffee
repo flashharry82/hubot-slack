@@ -23,6 +23,7 @@ module.exports = (robot) ->
     try
       robot.send user, "Monitor test"
     catch error
+      robot.logger.error "uptimerobot error: #{error}."
       console.log "uptimerobot error: #{error}."
 
     res.end "OK"
