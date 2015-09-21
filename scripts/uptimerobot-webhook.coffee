@@ -1,20 +1,10 @@
-url = require('url')
-querystring = require('querystring')
-
 module.exports = (robot) ->
   robot.router.post "/uptimerobot", (req, res) ->
 
-    query = querystring.parse(url.parse(req.url).query)
+    data = req.body
+    user = {room: data.room}
 
-    user = {}
-#    user.room = query.room if query.room
-#    user.type = query.type if query.type
-
-#    {room} = req.params;
-    {room, monitorID, monitorURL, monitorFriendlyName, alertType, alertDetails, monitorAlertContacts} = url.parse(req.url, true).query
-    user.room = room
-
-    status = switch alertType
+    status = switch data.alertType
         when '0' then 'paused'
         when '1' then 'not checked yet'
         when '2' then 'up'
@@ -22,8 +12,8 @@ module.exports = (robot) ->
         when '9' then 'down'
 
     try
-      robot.send user, "Monitor is #{status} #{monitorFriendlyName} (#{monitorURL})"
+      robot.send user, "Monitor is #{status} #{data.monitorFriendlyName} (#{data.monitorURL})"
     catch error
-      console.log "uptimerobot error: #{error}."
+      robot.send "uptimerobot error: #{error}."
 
     res.end "OK"
