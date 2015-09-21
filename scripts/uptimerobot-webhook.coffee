@@ -1,4 +1,5 @@
-url = require('url');
+url = require('url')
+querystring = require('querystring')
 
 module.exports = (robot) ->
   robot.router.post "/uptimerobot/:room", (req, res) ->
